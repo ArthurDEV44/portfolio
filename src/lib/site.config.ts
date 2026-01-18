@@ -26,45 +26,33 @@ export const siteConfig = {
   },
 };
 
-// Stack principale
+// Stack principale - Langages & Frameworks
 export const mainStack = [
+  { name: "Rust", category: "Language" },
   { name: "Next.js", category: "Framework" },
-  { name: "Astro", category: "Framework" },
-  { name: "Rust", category: "Backend" },
-  { name: "Electron", category: "Desktop" },
-  { name: "Clerk", category: "Auth" },
-  { name: "Vercel", category: "Hosting" },
-  { name: "TailwindCSS", category: "Styling" },
-  { name: "Neon", category: "Database" },
-  { name: "Prisma", category: "ORM" },
-  { name: "Stripe", category: "Payment" },
-  { name: "Zustand", category: "State" },
-  { name: "useSWR", category: "Data Fetching" },
-  { name: "Upstash", category: "Redis" },
-  { name: "Ink", category: "CLI" },
-  { name: "Ratatui", category: "TUI" },
-  { name: "Socket.io", category: "Realtime" },
-  { name: "Resend", category: "Email" },
-  { name: "Cloudflare", category: "CDN" },
-];
-
-// Stack secondaire
-export const secondaryStack = [
-  { name: "Angular", category: "Framework" },
-  { name: "Fastify", category: "Backend" },
-  { name: "Express", category: "Backend" },
-  { name: "NestJS", category: "Backend" },
-  { name: "PrimeNG", category: "UI Library" },
-  { name: "Three.js", category: "3D" },
-  { name: "KoaJS", category: "Backend" },
   { name: "Python", category: "Language" },
-  { name: "Flask", category: "Backend" },
+  { name: "Blockchain", category: "Web3" },
+  { name: "Tauri", category: "Desktop" },
+  { name: "TypeScript", category: "Language" },
+  { name: "TailwindCSS", category: "Styling" },
 ];
 
-// Outils de développement
+// Outils & Services
 export const devTools = [
   { name: "Claude Code", category: "AI Assistant" },
   { name: "Cursor", category: "IDE" },
+  { name: "Hugging Face", category: "AI Platform" },
+  { name: "Ollama", category: "Local LLM" },
+  { name: "vLLM", category: "Inference" },
+  { name: "Llama.cpp", category: "Inference" },
+  { name: "Vercel", category: "Hosting" },
+  { name: "Render", category: "Hosting" },
+  { name: "Drizzle", category: "ORM" },
+  { name: "Stripe", category: "Payment" },
+  { name: "Neon", category: "Database" },
+  { name: "Clerk", category: "Auth" },
+  { name: "Cloudflare", category: "CDN" },
+  { name: "Solana", category: "Web3" },
 ];
 
 // Compétences IA
@@ -72,90 +60,31 @@ export const aiSkills = [
   {
     name: "Orchestration multi-agents",
     description:
-      "Systèmes d'agents spécialisés (Intent Analyzer, Task Planner, Tool Executor, Quality Validator) avec auto-réflexion, retry intelligent et amélioration itérative",
+      "Systèmes d'agents spécialisés avec auto-réflexion, planification dynamique et exécution parallèle de tâches complexes",
   },
   {
     name: "RAG avancé",
     description:
-      "Reranking contextuel multi-critères (similarité sémantique, pertinence contextuelle, qualité de code) et enrichissement de contexte multi-niveaux (code avant/après, dépendances, documentation)",
-  },
-  {
-    name: "Tree of Thoughts planning",
-    description:
-      "Exploration stratégique avec scoring multi-critères pour la planification de tâches complexes",
-  },
-  {
-    name: "Batch editing transactionnel",
-    description:
-      "Parallélisation de tool calls, rollback et checkpoints pour des modifications de code sécurisées et performantes",
-  },
-  {
-    name: "Détection de patterns",
-    description:
-      "Détection de gaps algorithmiques, pattern detection avec anti-patterns pour améliorer la qualité du code",
-  },
-  {
-    name: "Orchestration de workflows",
-    description:
-      "Workflows multi-phases avec gestion de dépendances et topological sorting pour l'exécution optimale",
-  },
-  {
-    name: "Indexation sémantique AST",
-    description:
-      "Indexation incrémentale (TypeScript/Python) avec chunking intelligent par fonction/classe/module/responsabilité",
-  },
-  {
-    name: "Analyse de dépendances",
-    description:
-      "Construction de graphes de dépendances (imports, exports, calls, inheritance) et analyse d'impact avec propagation de changements",
-  },
-  {
-    name: "Gestion de contexte dynamique",
-    description:
-      "Fenêtre de contexte dynamique avec priorisation adaptative et compression intelligente",
-  },
-  {
-    name: "Validation multi-niveaux",
-    description:
-      "Validation syntaxe, types, sémantique, style, fonctionnel, intégration pour garantir la qualité du code",
-  },
-  {
-    name: "Grounding anti-hallucination",
-    description:
-      "Vérification de références/imports/types, scoring de confiance pondéré pour réduire les erreurs",
-  },
-  {
-    name: "NLU spécialisé",
-    description:
-      "Traitement du langage naturel pour prompts de développement avec extraction d'entités, désambiguïsation contextuelle et apprentissage des préférences utilisateur",
-  },
-  {
-    name: "Cache intelligent multi-niveaux",
-    description:
-      "Cache pour embeddings, résultats de recherche, analyses AST et réponses LLM pour optimiser les performances",
-  },
-  {
-    name: "Optimisations de performance",
-    description:
-      "Batching, streaming, rate limiting adaptatif, retry avec backoff exponentiel pour des systèmes performants",
+      "Retrieval-Augmented Generation avec reranking contextuel, chunking sémantique et enrichissement multi-sources",
   },
   {
     name: "LLM Engineering",
     description:
-      "ReAct, validation auto multi-langages, prompt engineering dynamique pour des systèmes IA robustes",
+      "Prompt engineering avancé, fine-tuning, évaluation de modèles et optimisation des pipelines d'inférence",
   },
   {
     name: "Intégration MCP",
     description:
-      "Model Context Protocol pour l'intégration avancée d'agents IA dans des environnements de développement",
+      "Model Context Protocol pour connecter les LLMs à des outils externes, APIs et sources de données en temps réel",
   },
-];
-
-// Compétences workflow
-export const workflowSkills = [
   {
-    name: "n8n",
-    description: "Automatisation de workflows et intégration d'APIs",
+    name: "Agentic Workflows",
+    description:
+      "Conception de workflows autonomes avec tool use, function calling et boucles de rétroaction intelligentes",
+  },
+  {
+    name: "Computer Use & Browser Automation",
+    description:
+      "Agents capables d'interagir avec des interfaces graphiques, navigateurs et applications desktop de manière autonome",
   },
 ];
-

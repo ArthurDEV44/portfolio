@@ -1,145 +1,130 @@
 "use client";
 
-import { ArrowUp, Linkedin, Mail, Github } from "lucide-react";
+import { ArrowUp, Github, Linkedin, Mail } from "lucide-react";
+import { motion } from "motion/react";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { fadeIn, viewportConfig } from "@/lib/animation-variants";
 import { siteConfig } from "@/lib/site.config";
 
-export function FooterSection() {
+const socialLinks = [
+  {
+    name: "Email",
+    href: `mailto:${siteConfig.links.email}`,
+    icon: Mail,
+  },
+  {
+    name: "LinkedIn",
+    href: siteConfig.links.linkedin,
+    icon: Linkedin,
+  },
+  {
+    name: "GitHub",
+    href: siteConfig.links.github,
+    icon: Github,
+  },
+];
+
+interface SocialButtonProps {
+  link: {
+    name: string;
+    href: string;
+    icon: React.ElementType;
+  };
+}
+
+function SocialButton({ link }: SocialButtonProps) {
+  const Icon = link.icon;
+  const isMailto = link.href.startsWith("mailto");
+
   return (
-    <footer className="bg-black text-gray-300 rounded-lg sm:rounded-xl relative z-0">
-      <div className="w-full max-w-[1200px] mx-auto pt-20 sm:pt-28 md:pt-32 lg:pt-36 xl:pt-40 pb-8 sm:pb-10 md:pb-12 px-4 sm:px-6 md:px-8 lg:px-0">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 md:gap-12 mb-8 sm:mb-10">
+    <a
+      href={link.href}
+      target={isMailto ? undefined : "_blank"}
+      rel={isMailto ? undefined : "noopener noreferrer"}
+      aria-label={link.name}
+      className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/30 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-all duration-300"
+    >
+      <Icon className="w-4 h-4" />
+    </a>
+  );
+}
+
+export function FooterSection() {
+  const currentYear = new Date().getFullYear();
+  const { getVariants } = useReducedMotion();
+  const variants = getVariants(fadeIn);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <motion.footer
+      className="bg-black border-t border-white/5 py-12"
+      variants={variants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={viewportConfig}
+    >
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Brand */}
-          <div className="md:col-span-1">
-            <h3 className="font-['PPMori'] font-medium text-2xl sm:text-3xl text-white tracking-[-0.07em] leading-none mb-3 sm:mb-4">
+          <div className="text-center md:text-left">
+            <a
+              href="/"
+              className="font-display font-semibold text-white hover:text-white/80 transition-colors"
+            >
               {siteConfig.name}
-            </h3>
-            <p className="text-white mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed">
+            </a>
+            <p className="text-white/40 text-sm mt-1">
               Développeur Full Stack & Architecte IA
             </p>
-            <div className="flex items-center space-x-3 sm:space-x-4">
-              <a
-                href={`mailto:${siteConfig.links.email}`}
-                className="flex items-center text-white transition-colors p-1.5 sm:p-2 rounded-md sm:rounded-lg hover:bg-white/10"
-                aria-label="Email"
-              >
-                <Mail className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
-              <a
-                href={siteConfig.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center text-white transition-colors p-1.5 sm:p-2 rounded-md sm:rounded-lg hover:bg-white/10"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
-              <a
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center text-white transition-colors p-1.5 sm:p-2 rounded-md sm:rounded-lg hover:bg-white/10"
-                aria-label="GitHub"
-              >
-                <Github className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
-            </div>
           </div>
 
-          {/* Navigation */}
-          <div>
-            <h4 className="text-gray-400 font-['PPMori'] font-semibold mb-3 sm:mb-4 text-xs sm:text-sm tracking-wide">
-              Navigation
-            </h4>
-            <ul className="space-y-2 sm:space-y-3">
-              <li>
-                <a
-                  href="#skills"
-                  className="text-white transition-colors text-xs sm:text-sm font-['PPMori'] hover:text-gray-300"
-                >
-                  Compétences
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#expertise"
-                  className="text-white transition-colors text-xs sm:text-sm font-['PPMori'] hover:text-gray-300"
-                >
-                  Expertise IA
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#contact"
-                  className="text-white transition-colors text-xs sm:text-sm font-['PPMori'] hover:text-gray-300"
-                >
-                  Contact
-                </a>
-              </li>
-            </ul>
-          </div>
+          {/* Social Links */}
+          <div className="flex items-center gap-3">
+            {socialLinks.map((link) => (
+              <SocialButton key={link.name} link={link} />
+            ))}
 
-          {/* Links */}
-          <div>
-            <h4 className="text-gray-400 font-['PPMori'] font-semibold mb-3 sm:mb-4 text-xs sm:text-sm tracking-wide">
-              Liens
-            </h4>
-            <ul className="space-y-2 sm:space-y-3">
-              <li>
-                <a
-                  href={siteConfig.links.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white transition-colors text-xs sm:text-sm font-['PPMori'] hover:text-gray-300"
-                >
-                  LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  href={siteConfig.links.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white transition-colors text-xs sm:text-sm font-['PPMori'] hover:text-gray-300"
-                >
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a
-                  href={siteConfig.links.cal}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white transition-colors text-xs sm:text-sm font-['PPMori'] hover:text-gray-300"
-                >
-                  Réserver un appel
-                </a>
-              </li>
-            </ul>
+            {/* Separator */}
+            <div className="w-px h-6 bg-white/10 mx-2" />
+
+            {/* Scroll to top */}
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+              aria-label="Retour en haut"
+            >
+              <ArrowUp className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-6 sm:pt-8 border-t border-gray-800">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-3 sm:gap-4">
-            <p className="text-gray-400 text-xs sm:text-sm font-['PPMori'] text-center md:text-left">
-              © {new Date().getFullYear()} {siteConfig.name}. Tous droits
-              réservés.
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-xs sm:text-sm font-['PPMori'] px-3 sm:px-4 py-1.5 sm:py-2 rounded-md sm:rounded-lg hover:bg-white/10"
-              aria-label="Retour en haut"
+        <div className="mt-8 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/40">
+          <p>
+            © {currentYear} {siteConfig.name}. Tous droits réservés.
+          </p>
+
+          {/* Legal links */}
+          <nav className="flex gap-6" aria-label="Liens légaux">
+            <a
+              href="/mentions-legales"
+              className="hover:text-white/60 transition-colors"
             >
-              <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5" />
-              <span>Retour en haut</span>
-            </button>
-          </div>
+              Mentions légales
+            </a>
+            <a
+              href="/confidentialite"
+              className="hover:text-white/60 transition-colors"
+            >
+              Confidentialité
+            </a>
+          </nav>
         </div>
       </div>
-    </footer>
+    </motion.footer>
   );
 }
-

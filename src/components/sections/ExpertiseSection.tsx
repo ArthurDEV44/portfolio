@@ -1,135 +1,121 @@
 "use client";
 
+import { Bot, Brain, Monitor, Search, Workflow, Zap } from "lucide-react";
+import { motion, type Variants } from "motion/react";
+import { GlassCard } from "@/components/ui/glass-card";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 import {
-  BrainCircuit,
-  Workflow,
-  Code2,
-  Database,
-  Sparkles,
-} from "lucide-react";
-import { useIntersectionObserver } from "@/hooks/use-intersection-observer";
-import { aiSkills, workflowSkills } from "@/lib/site.config";
+  fadeInUp,
+  hoverLift,
+  staggerContainer,
+  viewportConfig,
+} from "@/lib/animation-variants";
+import { aiSkills } from "@/lib/site.config";
 
-const iconMap: Record<string, React.ElementType> = {
-  "Agentique IA": BrainCircuit,
-  "RAG avancé": Database,
-  "Analyse AST": Code2,
-  "LLM Engineering": Sparkles,
-  MCP: Workflow,
-  n8n: Workflow,
+const skillIcons: Record<string, React.ReactNode> = {
+  "Orchestration multi-agents": <Bot className="w-5 h-5" />,
+  "RAG avancé": <Search className="w-5 h-5" />,
+  "LLM Engineering": <Brain className="w-5 h-5" />,
+  "Intégration MCP": <Zap className="w-5 h-5" />,
+  "Agentic Workflows": <Workflow className="w-5 h-5" />,
+  "Computer Use & Browser Automation": <Monitor className="w-5 h-5" />,
 };
 
+interface ExpertiseCardProps {
+  skill: { name: string; description: string };
+  variant?: "ai" | "workflow";
+  cardVariants: Variants;
+  prefersReducedMotion: boolean | null;
+}
+
+function ExpertiseCard({
+  skill,
+  variant = "ai",
+  cardVariants,
+  prefersReducedMotion,
+}: ExpertiseCardProps) {
+  const icon = skillIcons[skill.name] || <Zap className="w-5 h-5" />;
+
+  return (
+    <motion.div
+      variants={cardVariants}
+      whileHover={prefersReducedMotion ? undefined : hoverLift}
+    >
+      <GlassCard variant="card" glowLine className="p-6 h-full">
+        <div className="flex items-start gap-4">
+          {/* Icon */}
+          <div
+            className={
+              variant === "workflow"
+                ? "w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 shrink-0"
+                : "w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0"
+            }
+          >
+            {icon}
+          </div>
+
+          {/* Content */}
+          <div>
+            <h4 className="font-display font-medium text-white mb-2">
+              {skill.name}
+            </h4>
+            <p className="text-sm text-white/50 leading-relaxed">
+              {skill.description}
+            </p>
+          </div>
+        </div>
+      </GlassCard>
+    </motion.div>
+  );
+}
+
 export function ExpertiseSection() {
-  useIntersectionObserver("skill-card");
+  const { prefersReducedMotion, getVariants } = useReducedMotion();
+  const containerVariants = getVariants(staggerContainer);
+  const cardVariants = getVariants(fadeInUp);
 
   return (
     <section
       id="expertise"
-      className="py-12 sm:py-16 md:py-20 lg:py-24 xl:py-32 bg-gray-50 scroll-mt-20 sm:scroll-mt-24"
+      className="py-24 lg:py-32 bg-[#050505]"
       aria-labelledby="expertise-heading"
     >
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 lg:px-0">
-        {/* Section Header */}
-        <header className="text-center mb-10 sm:mb-14 md:mb-20">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <span className="inline-block px-3 py-1 text-sm text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 rounded-full mb-4">
+            Intelligence Artificielle
+          </span>
           <h2
             id="expertise-heading"
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-['PPMori'] font-medium text-gray-900 mb-3 sm:mb-4 tracking-[-0.07em]"
+            className="text-3xl sm:text-4xl lg:text-5xl font-display font-semibold text-white mb-4"
           >
-            Expertise IA & Automatisation
+            Expertise <span className="text-gradient-emerald">IA</span>
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 font-['PPMori'] font-normal">
-            Conception de systèmes intelligents et automatisation avancée
+          <p className="text-white/60 max-w-2xl mx-auto">
+            Systèmes d&apos;agents IA avancés, RAG et LLM Engineering.
           </p>
-        </header>
-
-        {/* Compétences IA */}
-        <div className="mb-12 sm:mb-16 md:mb-20">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-['PPMori'] font-medium text-gray-900 mb-6 sm:mb-8 tracking-[-0.05em]">
-            Intelligence Artificielle
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {aiSkills.map((skill, index) => {
-              const Icon = iconMap[skill.name] || BrainCircuit;
-              return (
-                <div
-                  key={skill.name}
-                  className="skill-card bg-white border border-gray-200 rounded-xl p-6 sm:p-8"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-gray-50 rounded-lg shrink-0">
-                      <Icon className="w-6 h-6 text-gray-700" />
-                    </div>
-                    <div>
-                      <h4 className="font-['PPMori'] font-medium text-lg sm:text-xl text-gray-900 mb-2">
-                        {skill.name}
-                      </h4>
-                      <p className="font-['PPMori'] font-normal text-sm sm:text-base text-gray-600 leading-relaxed">
-                        {skill.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
         </div>
 
-        {/* Workflow & Automatisation */}
-        <div>
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-['PPMori'] font-medium text-gray-900 mb-6 sm:mb-8 tracking-[-0.05em]">
-            Workflow & Automatisation
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-            {workflowSkills.map((skill, index) => {
-              const Icon = iconMap[skill.name] || Workflow;
-              return (
-                <div
-                  key={skill.name}
-                  className="skill-card bg-white border border-gray-200 rounded-xl p-6 sm:p-8"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-gray-50 rounded-lg shrink-0">
-                      <Icon className="w-6 h-6 text-gray-700" />
-                    </div>
-                    <div>
-                      <h4 className="font-['PPMori'] font-medium text-lg sm:text-xl text-gray-900 mb-2">
-                        {skill.name}
-                      </h4>
-                      <p className="font-['PPMori'] font-normal text-sm sm:text-base text-gray-600 leading-relaxed">
-                        {skill.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Note sur Quantum Computing */}
-        <div className="mt-12 sm:mt-16 md:mt-20">
-          <div className="skill-card bg-linear-to-br from-cyan-600 via-blue-600 to-purple-600 border border-cyan-400/30 rounded-xl p-6 sm:p-8 text-white shadow-lg shadow-purple-500/20">
-            <div className="flex items-start gap-4">
-              <div className="p-3 bg-white/20 backdrop-blur-sm rounded-lg shrink-0">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
-              <div>
-                <h4 className="font-['PPMori'] font-medium text-lg sm:text-xl mb-2">
-                  Side Project : Quantum Computing
-                </h4>
-                <p className="font-['PPMori'] font-normal text-sm sm:text-base text-white/90 leading-relaxed">
-                  Exploration du calcul quantique via IBM Quantum avec des tests
-                  réels (10 min/mois). Un pas modeste mais concret vers l'avenir de
-                  la technologie.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* AI Skills Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16"
+        >
+          {aiSkills.map((skill) => (
+            <ExpertiseCard
+              key={skill.name}
+              skill={skill}
+              variant="ai"
+              cardVariants={cardVariants}
+              prefersReducedMotion={prefersReducedMotion}
+            />
+          ))}
+        </motion.div>
       </div>
     </section>
   );
 }
-

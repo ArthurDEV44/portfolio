@@ -1,10 +1,12 @@
 import {
-  HeroSection,
   AboutSection,
-  SkillsSection,
-  ExpertiseSection,
+  ApproachSection,
   ContactSection,
+  ExpertiseSection,
   FooterSection,
+  HeroSection,
+  NavbarSection,
+  SkillsSection,
 } from "@/components";
 import { siteConfig } from "@/lib/site.config";
 
@@ -145,9 +147,16 @@ export default function Home() {
         }}
       />
 
-      <main className="min-h-screen px-4 pb-4">
+      <NavbarSection />
+
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="min-h-screen outline-none"
+      >
         <HeroSection />
         <AboutSection />
+        <ApproachSection />
         <SkillsSection />
         <ExpertiseSection />
         <ContactSection />

@@ -1,0 +1,28 @@
+# Configuration Bun pour Portfolio
+# Documentation : https://bun.sh/docs/runtime/bunfig
+
+[install]
+# Utilise le lockfile existant sans le modifier (utile en CI)
+# frozenLockfile = true
+
+# Optimisation : évite d'installer les dépendances optionnelles inutiles
+optional = false
+
+[install.cache]
+# Active le cache global pour accélérer les installations
+disable = false
+
+[run]
+# Utilise le shell intégré de Bun (plus rapide, cross-platform)
+shell = "bun"
+
+# Remplace automatiquement 'node' par 'bun' dans les scripts
+bun = true
+
+# Mode silencieux : n'affiche pas le nom du script exécuté
+# silent = true
+
+[test]
+# Configuration pour les tests (si ajoutés plus tard)
+coverage = false
+# coverageThreshold = { line = 80, function = 80 }
