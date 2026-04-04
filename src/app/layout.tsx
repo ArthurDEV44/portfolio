@@ -37,9 +37,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arthur Jean - AI Builder & Architecte Produit",
-  description:
-    "AI Builder & Architecte Produit. Je construis des produits tech de bout en bout : SaaS, dev tools et systèmes d'agents IA.",
+  metadataBase: new URL("https://arthurjean.com"),
 };
 
 export default function RootLayout({
