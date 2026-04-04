@@ -1,13 +1,12 @@
 // Export centralisé de tous les composants
 
-export { AboutSection } from "./sections/AboutSection";
-export { ApproachSection } from "./sections/ApproachSection";
-export { ContactSection } from "./sections/ContactSection";
-export { ExpertiseSection } from "./sections/ExpertiseSection";
+export { ClientsSection } from "./sections/ClientsSection";
 export { FooterSection } from "./sections/FooterSection";
 export { HeroSection } from "./sections/HeroSection";
+export { JourneySection } from "./sections/JourneySection";
 export { NavbarSection } from "./sections/NavbarSection";
-export { SkillsSection } from "./sections/SkillsSection";
+export { ProjectsSection } from "./sections/ProjectsSection";
+export { ValueSection } from "./sections/ValueSection";
 
 // UI Components
 export { Button } from "./ui/button";

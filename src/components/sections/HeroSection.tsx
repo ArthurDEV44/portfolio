@@ -1,113 +1,110 @@
 "use client";
 
-import { ArrowDown, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import {
-  badgeVariants,
-  fadeInUp,
-  staggerContainerSlow,
-} from "@/lib/animation-variants";
+import { fadeInUp, staggerContainerSlow } from "@/lib/animation-variants";
 import { siteConfig } from "@/lib/site.config";
-import { HeroBackground } from "./hero/HeroBackground";
 
-const TECH_STACK = ["Next.js", "Rust", "Electron", "TypeScript"];
+const socialLinks = [
+  {
+    label: "GitHub",
+    href: siteConfig.links.github,
+    external: true,
+  },
+  {
+    label: "LinkedIn",
+    href: siteConfig.links.linkedin,
+    external: true,
+  },
+  {
+    label: "X",
+    href: siteConfig.links.x,
+    external: true,
+  },
+];
 
 export function HeroSection() {
   const { getVariants } = useReducedMotion();
 
   const activeContainerVariants = getVariants(staggerContainerSlow);
   const activeItemVariants = getVariants(fadeInUp);
-  const activeBadgeVariants = getVariants(badgeVariants);
 
   return (
     <section
       id="hero"
-      className="relative min-h-dvh bg-[#050505] overflow-hidden"
+      className="pt-28 pb-12 lg:pt-32 lg:pb-16"
       aria-labelledby="hero-heading"
     >
-      {/* Background avec MeshGradient */}
-      <HeroBackground />
-
-      {/* Container principal - centré verticalement et horizontalement */}
-      <motion.div
-        className="relative z-10 flex flex-col items-center justify-center min-h-dvh text-center px-4 sm:px-6"
-        variants={activeContainerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        {/* Titre principal */}
-        <motion.h1
-          id="hero-heading"
-          variants={activeItemVariants}
-          className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold leading-[1.05] tracking-tight text-white mb-6"
-        >
-          Développeur Full Stack
-          <br />
-          <span className="text-gradient-cyan">&amp; Architecte IA</span>
-        </motion.h1>
-
-        {/* Sous-titre */}
-        <motion.p
-          variants={activeItemVariants}
-          className="text-lg sm:text-xl lg:text-2xl text-white/80 max-w-2xl mb-10 leading-relaxed"
-        >
-          Je conçois des{" "}
-          <span className="text-gradient-emerald">solutions intelligentes</span>{" "}
-          pour startups : SaaS, marketplaces et systèmes d&apos;agents IA.
-        </motion.p>
-
-        {/* CTAs */}
+      <div className="max-w-[800px] mx-auto px-4 sm:px-6">
         <motion.div
-          variants={activeItemVariants}
-          className="flex flex-col sm:flex-row gap-4"
+          variants={activeContainerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          <Button
-            size="xl"
-            render={
-              <a
-                href={siteConfig.links.cal}
-                target="_blank"
-                rel="noopener noreferrer"
+          {/* Avatar + Name */}
+          <motion.div
+            variants={activeItemVariants}
+            className="flex items-center gap-5 mb-6"
+          >
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shrink-0 border border-gray-200 dark:border-white/10">
+              <Image
+                src="/images/avatar.webp"
+                alt={siteConfig.name}
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+            <div>
+              <h1
+                id="hero-heading"
+                className="text-3xl sm:text-4xl lg:text-5xl font-pixel-grid text-gray-900 dark:text-white"
               >
-                Discutons de votre projet
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
-              </a>
-            }
-          />
+                {siteConfig.name}
+              </h1>
+              <p className="text-lg text-gray-500 dark:text-white/50">
+                AI Builder & Architecte Produit
+              </p>
+            </div>
+          </motion.div>
 
-          <Button
-            variant="glass"
-            size="xl"
-            render={
-              <a href="#skills">
-                Voir mes compétences
-                <ArrowDown className="w-4 h-4" />
-              </a>
-            }
-          />
+          {/* Description */}
+          <motion.p
+            variants={activeItemVariants}
+            className="text-gray-400 dark:text-white/40 max-w-xl leading-relaxed mb-8 italic"
+          >
+            Je construis des produits tech de bout en bout : SaaS, dev tools et
+            systèmes d&apos;agents IA. Je ne code plus, j&apos;orchestre.
+          </motion.p>
+
+          {/* Social links */}
+          <motion.div
+            variants={activeItemVariants}
+            className="flex flex-wrap gap-2"
+          >
+            {socialLinks.map((link) => (
+              <Button
+                key={link.label}
+                variant="outline"
+                size="default"
+                render={
+                  // biome-ignore lint/a11y/useAnchorContent: content injected by Base UI render prop
+                  <a
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noopener noreferrer" : undefined}
+                    aria-label={link.label}
+                  />
+                }
+              >
+                {link.label}
+              </Button>
+            ))}
+          </motion.div>
         </motion.div>
-
-        {/* Tech badges */}
-        <div className="flex flex-wrap justify-center gap-3 mt-12">
-          {TECH_STACK.map((tech, i) => (
-            <motion.span
-              key={tech}
-              custom={i}
-              variants={activeBadgeVariants}
-              initial="hidden"
-              animate="visible"
-              className="px-3 py-1 text-sm text-white/60 bg-white/5 border border-white/10 rounded-full"
-            >
-              {tech}
-            </motion.span>
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Fade bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#050505] to-transparent pointer-events-none z-[5]" />
+      </div>
     </section>
   );
 }

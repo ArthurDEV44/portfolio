@@ -22,6 +22,7 @@ export const siteConfig = {
     email: "arthur.jean@strivex.fr", // Remplacez par votre email
     linkedin: "https://www.linkedin.com/in/arthur-jean-401b56239/",
     github: "https://github.com/ArthurDEV44", // Remplacez par votre GitHub
+    x: "https://x.com/arthurjdev",
     cal: "https://cal.com/arthurjean/30min",
   },
 };

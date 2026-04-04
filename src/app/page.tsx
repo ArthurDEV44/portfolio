@@ -1,12 +1,11 @@
 import {
-  AboutSection,
-  ApproachSection,
-  ContactSection,
-  ExpertiseSection,
+  ClientsSection,
   FooterSection,
   HeroSection,
+  JourneySection,
   NavbarSection,
-  SkillsSection,
+  ProjectsSection,
+  ValueSection,
 } from "@/components";
 import { siteConfig } from "@/lib/site.config";
 
@@ -155,11 +154,10 @@ export default function Home() {
         className="min-h-screen outline-none"
       >
         <HeroSection />
-        <AboutSection />
-        <ApproachSection />
-        <SkillsSection />
-        <ExpertiseSection />
-        <ContactSection />
+        <ProjectsSection />
+        <ClientsSection />
+        <ValueSection />
+        <JourneySection />
         <FooterSection />
       </main>
     </>

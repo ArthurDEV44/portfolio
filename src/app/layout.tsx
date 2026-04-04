@@ -1,3 +1,4 @@
+import { GeistPixelCircle, GeistPixelGrid } from "geist/font/pixel";
 import type { Metadata } from "next";
 import {
   Cormorant_Garamond,
@@ -6,6 +7,7 @@ import {
   Plus_Jakarta_Sans,
 } from "next/font/google";
 import "./globals.css";
+import { Providers } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,9 +37,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arthur Jean - Développeur Full Stack & Architecte IA",
+  title: "Arthur Jean - AI Builder & Architecte Produit",
   description:
-    "Développeur web/desktop spécialisé en Next.js, Rust, Electron et systèmes d'agents IA. Je conçois des solutions disruptives pour startups.",
+    "AI Builder & Architecte Produit. Je construis des produits tech de bout en bout : SaaS, dev tools et systèmes d'agents IA.",
 };
 
 export default function RootLayout({
@@ -46,9 +48,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
       <head>
-        {/* Preload des fonts critiques */}
+        {/* Prevent flash of wrong theme */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(localStorage.getItem('theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}`,
+          }}
+        />
         <link
           rel="preload"
           href="/fonts/PPMori-Regular.otf"
@@ -63,7 +70,6 @@ export default function RootLayout({
           type="font/otf"
           crossOrigin="anonymous"
         />
-        {/* Preconnect Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -72,9 +78,8 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${plusJakartaSans.variable} ${cormorantGaramond.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${plusJakartaSans.variable} ${cormorantGaramond.variable} ${geistMono.variable} ${GeistPixelGrid.variable} ${GeistPixelCircle.variable} antialiased`}
       >
-        {/* Skip link pour l'accessibilité */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500"
@@ -82,7 +87,7 @@ export default function RootLayout({
           Aller au contenu principal
         </a>
 
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
