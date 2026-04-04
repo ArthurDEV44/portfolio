@@ -10,6 +10,7 @@ interface MotionContainerProps {
   variants: Variants;
   className?: string;
   viewport?: { once?: boolean; margin?: string };
+  immediate?: boolean;
 }
 
 export function MotionContainer({
@@ -17,14 +18,16 @@ export function MotionContainer({
   variants,
   className,
   viewport = defaultViewport,
+  immediate = false,
 }: MotionContainerProps) {
   const { getVariants } = useReducedMotion();
   return (
     <motion.div
       variants={getVariants(variants)}
       initial="hidden"
-      whileInView="visible"
-      viewport={viewport}
+      {...(immediate
+        ? { animate: "visible" }
+        : { whileInView: "visible", viewport })}
       className={className}
     >
       {children}

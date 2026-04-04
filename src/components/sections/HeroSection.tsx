@@ -1,9 +1,6 @@
-"use client";
-
-import { motion } from "motion/react";
 import Image from "next/image";
+import { MotionContainer, MotionItem } from "@/components/motion/MotionWrapper";
 import { Button } from "@/components/ui/button";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { fadeInUp, staggerContainerSlow } from "@/lib/animation-variants";
 import { siteConfig } from "@/lib/site.config";
 
@@ -26,11 +23,6 @@ const socialLinks = [
 ];
 
 export function HeroSection() {
-  const { getVariants } = useReducedMotion();
-
-  const activeContainerVariants = getVariants(staggerContainerSlow);
-  const activeItemVariants = getVariants(fadeInUp);
-
   return (
     <section
       id="hero"
@@ -38,14 +30,10 @@ export function HeroSection() {
       aria-labelledby="hero-heading"
     >
       <div className="max-w-[800px] mx-auto px-4 sm:px-6">
-        <motion.div
-          variants={activeContainerVariants}
-          initial="hidden"
-          animate="visible"
-        >
+        <MotionContainer variants={staggerContainerSlow} immediate>
           {/* Avatar + Name */}
-          <motion.div
-            variants={activeItemVariants}
+          <MotionItem
+            variants={fadeInUp}
             className="flex items-center gap-5 mb-6"
           >
             <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shrink-0 border border-gray-200 dark:border-white/10">
@@ -68,22 +56,18 @@ export function HeroSection() {
                 AI Builder & Architecte Produit
               </p>
             </div>
-          </motion.div>
+          </MotionItem>
 
           {/* Description */}
-          <motion.p
-            variants={activeItemVariants}
-            className="text-gray-400 dark:text-white/40 max-w-xl leading-relaxed mb-8 italic"
-          >
-            Je construis des produits tech de bout en bout : SaaS, dev tools et
-            systèmes d&apos;agents IA. Je ne code plus, j&apos;orchestre.
-          </motion.p>
+          <MotionItem variants={fadeInUp}>
+            <p className="text-gray-400 dark:text-white/40 max-w-xl leading-relaxed mb-8 italic">
+              Je construis des produits tech de bout en bout : SaaS, dev tools
+              et systèmes d&apos;agents IA. Je ne code plus, j&apos;orchestre.
+            </p>
+          </MotionItem>
 
           {/* Social links */}
-          <motion.div
-            variants={activeItemVariants}
-            className="flex flex-wrap gap-2"
-          >
+          <MotionItem variants={fadeInUp} className="flex flex-wrap gap-2">
             {socialLinks.map((link) => (
               <Button
                 key={link.label}
@@ -102,8 +86,8 @@ export function HeroSection() {
                 {link.label}
               </Button>
             ))}
-          </motion.div>
-        </motion.div>
+          </MotionItem>
+        </MotionContainer>
       </div>
     </section>
   );
