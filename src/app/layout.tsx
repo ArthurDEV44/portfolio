@@ -63,22 +63,16 @@ export default function RootLayout({
         />
         <link
           rel="preload"
-          href="/fonts/PPMori-Regular.otf"
+          href="/fonts/PPMori-Regular.woff2"
           as="font"
-          type="font/otf"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="/fonts/PPMori-SemiBold.otf"
+          href="/fonts/PPMori-SemiBold.woff2"
           as="font"
-          type="font/otf"
-          crossOrigin="anonymous"
-        />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
+          type="font/woff2"
           crossOrigin="anonymous"
         />
       </head>
