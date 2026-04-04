@@ -7,7 +7,7 @@ import {
   ProjectsSection,
   ValueSection,
 } from "@/components";
-import { siteConfig } from "@/lib/site.config";
+import { aiSkills, siteConfig } from "@/lib/site.config";
 
 // Configuration ISR - Revalidation toutes les 24h
 export const revalidate = 86400;
@@ -69,7 +69,15 @@ function getJsonLd() {
     jobTitle: "Développeur Full Stack & Architecte IA",
     description: siteConfig.description,
     email: siteConfig.links.email,
-    sameAs: [siteConfig.links.linkedin, siteConfig.links.github],
+    sameAs: [
+      siteConfig.links.linkedin,
+      siteConfig.links.github,
+      siteConfig.links.x,
+    ],
+    worksFor: {
+      "@type": "Organization",
+      name: "StriveX",
+    },
     knowsAbout: [
       "Next.js",
       "Rust",
@@ -90,6 +98,7 @@ function getJsonLd() {
     name: siteConfig.name,
     url: siteConfig.url,
     description: siteConfig.description,
+    inLanguage: "fr",
     author: {
       "@type": "Person",
       name: siteConfig.name,
@@ -115,6 +124,7 @@ function getJsonLd() {
       "Développement SaaS",
       "Consulting IA",
     ],
+    knowsAbout: aiSkills.map((skill) => skill.name),
   };
 
   return {
