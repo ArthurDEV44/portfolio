@@ -89,3 +89,43 @@ export const aiSkills = [
       "Agents capables d'interagir avec des interfaces graphiques, navigateurs et applications desktop de manière autonome",
   },
 ];
+
+// FAQ - Questions fréquentes
+export const faqItems = [
+  {
+    question: "Quelle est votre stack technique principale ?",
+    answer:
+      "Je travaille principalement avec Next.js et TypeScript pour le web, Rust pour les outils CLI et le backend performant, et Python pour les pipelines IA. Côté IA, je maîtrise Claude Code, les systèmes multi-agents, le RAG avancé et le protocole MCP.",
+  },
+  {
+    question: "Quel type de clients accompagnez-vous ?",
+    answer:
+      "J'accompagne principalement des startups et des entreprises tech qui veulent construire des produits ambitieux : SaaS, dev tools, marketplaces et systèmes d'agents IA. Je suis particulièrement adapté aux projets early-stage où il faut aller vite et itérer.",
+  },
+  {
+    question: "Comment se déroule une collaboration type ?",
+    answer:
+      "On commence par un appel de 30 minutes pour cadrer le besoin. Je livre ensuite en sprints courts avec des démos régulières. Je travaille en autonomie complète — de l'architecture au déploiement — avec une communication asynchrone via Slack ou email.",
+  },
+  {
+    question:
+      "Comment intégrez-vous l'IA dans votre workflow de développement ?",
+    answer:
+      "L'IA est au cœur de mon process. J'utilise Claude Code avec des skills et subagents personnalisés, des workflows multi-agents pour le développement, et Codex pour la review de code et les PRD. Je ne code plus ligne par ligne : j'orchestre.",
+  },
+  {
+    question: "Quels sont vos tarifs ?",
+    answer:
+      "Je travaille au forfait par projet ou en régie journalière. Les tarifs dépendent de la complexité et de la durée. Prenez rendez-vous pour un devis personnalisé via mon calendrier.",
+  },
+  {
+    question: "Êtes-vous disponible pour une mission ?",
+    answer:
+      "Ma disponibilité varie selon les projets en cours. Le meilleur moyen de le savoir est de réserver un créneau de 30 minutes via Cal.com pour discuter de votre projet.",
+  },
+  {
+    question: "Travaillez-vous en remote ou sur site ?",
+    answer:
+      "Je travaille exclusivement en remote. C'est ce qui me permet d'être le plus productif et de servir des clients partout en France et à l'international.",
+  },
+];

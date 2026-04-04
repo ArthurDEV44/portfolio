@@ -1,5 +1,6 @@
 import {
   ClientsSection,
+  FaqSection,
   FooterSection,
   HeroSection,
   JourneySection,
@@ -7,7 +8,7 @@ import {
   ProjectsSection,
   ValueSection,
 } from "@/components";
-import { aiSkills, siteConfig } from "@/lib/site.config";
+import { aiSkills, faqItems, siteConfig } from "@/lib/site.config";
 
 // Configuration ISR - Revalidation toutes les 24h
 export const revalidate = 86400;
@@ -127,10 +128,25 @@ function getJsonLd() {
     knowsAbout: aiSkills.map((skill) => skill.name),
   };
 
+  // Schema FAQPage
+  const faqPage = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return {
     person,
     website,
     professionalService,
+    faqPage,
   };
 }
 
@@ -158,6 +174,12 @@ export default function Home() {
           __html: JSON.stringify(jsonLd.professionalService),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd.faqPage),
+        }}
+      />
 
       <NavbarSection />
 
@@ -171,6 +193,7 @@ export default function Home() {
         <ClientsSection />
         <ValueSection />
         <JourneySection />
+        <FaqSection />
         <FooterSection />
       </main>
     </>
