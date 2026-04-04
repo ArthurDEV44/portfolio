@@ -1,12 +1,9 @@
-"use client";
-
-import { motion } from "motion/react";
-import { useReducedMotion } from "@/hooks/useReducedMotion";
 import {
-  fadeInUp,
-  staggerContainer,
-  viewportConfig,
-} from "@/lib/animation-variants";
+  MotionContainer,
+  MotionHeading,
+  MotionItem,
+} from "@/components/motion/MotionWrapper";
+import { fadeInUp, staggerContainer } from "@/lib/animation-variants";
 
 const steps = [
   {
@@ -36,10 +33,6 @@ const steps = [
 ];
 
 export function JourneySection() {
-  const { getVariants } = useReducedMotion();
-  const containerVariants = getVariants(staggerContainer);
-  const itemVariants = getVariants(fadeInUp);
-
   return (
     <section
       id="journey"
@@ -47,25 +40,20 @@ export function JourneySection() {
       aria-labelledby="journey-heading"
     >
       <div className="max-w-[800px] mx-auto px-4 sm:px-6">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-        >
-          <motion.h2
+        <MotionContainer variants={staggerContainer}>
+          <MotionHeading
             id="journey-heading"
-            variants={itemVariants}
+            variants={fadeInUp}
             className="text-xl sm:text-2xl lg:text-3xl font-mono tracking-tight text-gray-900 dark:text-white mb-16"
           >
             Parcours
-          </motion.h2>
+          </MotionHeading>
 
           <div className="flex flex-col gap-12">
             {steps.map((step) => (
-              <motion.div
+              <MotionItem
                 key={step.title}
-                variants={itemVariants}
+                variants={fadeInUp}
                 className="relative flex flex-col gap-3"
               >
                 <div className="flex items-center gap-3 mb-1">
@@ -80,10 +68,10 @@ export function JourneySection() {
                 <p className="text-sm text-gray-500 dark:text-white/50 leading-relaxed">
                   {step.description}
                 </p>
-              </motion.div>
+              </MotionItem>
             ))}
           </div>
-        </motion.div>
+        </MotionContainer>
       </div>
     </section>
   );
