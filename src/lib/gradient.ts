@@ -473,6 +473,7 @@ class Mesh {
 
   draw(): void {
     const gl = this.minigl.gl;
+    // biome-ignore lint/correctness/useHookAtTopLevel: WebGL API call, not a React hook
     gl.useProgram(this.material.program);
 
     for (const { uniform, location } of this.material.uniformInstances) {
