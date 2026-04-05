@@ -41,6 +41,7 @@ export function HeroSection() {
                 src="/images/avatar.webp"
                 alt={siteConfig.name}
                 fill
+                sizes="96px"
                 className="object-cover"
                 priority
               />

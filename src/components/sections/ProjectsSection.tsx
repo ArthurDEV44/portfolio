@@ -59,7 +59,7 @@ export function ProjectsSection() {
       </div>
 
       <DragCarousel>
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <div
             key={project.title}
             className="shrink-0 w-[85vw] sm:w-[500px] lg:w-[560px] group"
@@ -75,8 +75,10 @@ export function ProjectsSection() {
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(min-width: 1024px) 560px, (min-width: 640px) 500px, 85vw"
                   className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                   draggable={false}
+                  priority={index === 0}
                 />
               </div>
 

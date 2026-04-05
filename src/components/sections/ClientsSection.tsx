@@ -75,6 +75,7 @@ export function ClientsSection() {
                     src={client.image}
                     alt={client.title}
                     fill
+                    sizes="(min-width: 1024px) 560px, (min-width: 640px) 500px, 85vw"
                     className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
                     draggable={false}
                   />
