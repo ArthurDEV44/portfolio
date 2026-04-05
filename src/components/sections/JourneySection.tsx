@@ -7,13 +7,13 @@ import { fadeInUp, staggerContainer } from "@/lib/animation-variants";
 
 const steps = [
   {
-    period: "2021 — 2023",
+    period: "2021 - 2023",
     title: "Apprentissage développement",
     description:
       "Formation en alternance. Les bases du métier, les premières lignes de code, la découverte du terrain.",
   },
   {
-    period: "2023 — 2025",
+    period: "2023 - 2025",
     title: "Seul développeur en entreprise",
     description:
       "Architecture, produit, déploiement : tout reposait sur moi. Adoption de l'IA dès fin 2022 avec ChatGPT et GitHub Copilot, puis Cursor dès sa sortie.",

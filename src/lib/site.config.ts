@@ -105,7 +105,7 @@ export const faqItems = [
   {
     question: "Comment se déroule une collaboration type ?",
     answer:
-      "On commence par un appel de 30 minutes pour cadrer le besoin. Je livre ensuite en sprints courts avec des démos régulières. Je travaille en autonomie complète — de l'architecture au déploiement — avec une communication asynchrone via Slack ou email.",
+      "On commence par un appel de 30 minutes pour cadrer le besoin. Je livre ensuite en sprints courts avec des démos régulières. Je travaille en autonomie complète, de l'architecture au déploiement, avec une communication asynchrone via Slack ou email.",
   },
   {
     question:
