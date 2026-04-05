@@ -36,9 +36,7 @@
       "complexity": {
         "noImportantStyles": "off"
       },
-      "security": {
-        "noDangerouslySetInnerHtml": "off"
-      }
+      "security": {}
     },
     "domains": {
       "next": "recommended",

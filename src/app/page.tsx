@@ -158,26 +158,33 @@ export default function Home() {
       {/* Données structurées JSON-LD */}
       <script
         type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD from static siteConfig, output is JSON.stringify'd + <-escaped
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd.person),
+          __html: JSON.stringify(jsonLd.person).replace(/</g, "\\u003c"),
         }}
       />
       <script
         type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD from static siteConfig, output is JSON.stringify'd + <-escaped
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd.website),
+          __html: JSON.stringify(jsonLd.website).replace(/</g, "\\u003c"),
         }}
       />
       <script
         type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD from static siteConfig, output is JSON.stringify'd + <-escaped
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd.professionalService),
+          __html: JSON.stringify(jsonLd.professionalService).replace(
+            /</g,
+            "\\u003c",
+          ),
         }}
       />
       <script
         type="application/ld+json"
+        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD from static siteConfig, output is JSON.stringify'd + <-escaped
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(jsonLd.faqPage),
+          __html: JSON.stringify(jsonLd.faqPage).replace(/</g, "\\u003c"),
         }}
       />
 
