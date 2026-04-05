@@ -34,6 +34,7 @@ AI Builder & Architecte Produit basé en France. Je construis des produits tech 
   return new Response(content, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
+      "Cache-Control": "public, max-age=86400, s-maxage=86400",
     },
   });
 }
