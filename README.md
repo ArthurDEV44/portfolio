@@ -5,11 +5,13 @@ Portfolio personnel d'Arthur Jean, développeur Full Stack & Architecte IA spéc
 ## 🚀 Technologies
 
 - **Framework**: Next.js 16 (App Router)
-- **Styling**: TailwindCSS 4
-- **Fonts**: PP Mori (custom font)
-- **Icons**: Lucide React
-- **TypeScript**: Version 5
-- **Linter**: Biome
+- **Styling**: TailwindCSS 4 avec tw-animate-css
+- **UI**: Base UI Components, Lucide React (icônes)
+- **Animations**: motion/react (tree-shakeable)
+- **Linter/Formatter**: Biome (remplace ESLint + Prettier)
+- **Tests**: Vitest
+- **CI**: GitHub Actions
+- **Package Manager**: bun
 
 ## 📋 Structure du projet
 
@@ -17,56 +19,94 @@ Portfolio personnel d'Arthur Jean, développeur Full Stack & Architecte IA spéc
 portfolio/
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx          # Layout principal avec fonts
-│   │   ├── page.tsx            # Page d'accueil avec SEO et JSON-LD
-│   │   └── globals.css         # Styles globaux et animations
+│   │   ├── layout.tsx              # Layout principal avec fonts
+│   │   ├── page.tsx                # Page d'accueil avec SEO et JSON-LD
+│   │   └── globals.css             # Styles globaux et animations
 │   ├── components/
 │   │   ├── sections/
-│   │   │   ├── HeroSection.tsx       # Hero avec description
-│   │   │   ├── SkillsSection.tsx     # Stack technique
-│   │   │   ├── ExpertiseSection.tsx  # Expertise IA
-│   │   │   ├── ContactSection.tsx    # Contact
-│   │   │   └── FooterSection.tsx     # Footer
+│   │   │   ├── NavbarSection.tsx    # Navigation
+│   │   │   ├── HeroSection.tsx      # Hero avec description
+│   │   │   ├── ProjectsSection.tsx  # Projets et réalisations
+│   │   │   ├── ClientsSection.tsx   # Clients et partenaires
+│   │   │   ├── ValueSection.tsx     # Proposition de valeur
+│   │   │   ├── JourneySection.tsx   # Parcours professionnel
+│   │   │   ├── FaqSection.tsx       # FAQ avec JSON-LD FAQPage
+│   │   │   └── FooterSection.tsx    # Footer
 │   │   ├── ui/
-│   │   │   └── button.tsx      # Composant Button réutilisable
-│   │   └── index.ts            # Export centralisé
+│   │   │   ├── button.tsx           # Button avec class-variance-authority
+│   │   │   ├── glass-card.tsx       # Carte effet glass
+│   │   │   ├── mesh-gradient.tsx    # Gradient mesh animé
+│   │   │   ├── spinner.tsx          # Spinner de chargement
+│   │   │   └── ThemeToggle.tsx      # Toggle dark/light mode
+│   │   └── index.ts                # Export centralisé
 │   ├── hooks/
-│   │   └── use-intersection-observer.ts  # Hook pour animations scroll
+│   │   ├── useReducedMotion.ts     # Détection prefers-reduced-motion
+│   │   └── useTheme.tsx            # Gestion du thème dark/light
 │   └── lib/
-│       ├── site.config.ts      # Configuration du site
-│       └── utils.ts            # Utilitaires (cn)
-└── public/
-    └── fonts/                  # Fonts PP Mori
+│       ├── site.config.ts          # Configuration du site (données)
+│       ├── json-ld.ts              # Génération JSON-LD (Person, WebSite, ProfessionalService, FAQPage)
+│       ├── animation-variants.ts   # Variantes d'animation centralisées
+│       ├── gradient.ts             # Implémentation WebGL gradient
+│       ├── design-tokens.ts        # Tokens de design
+│       └── utils.ts                # Utilitaires (cn)
+├── suppress-baseline-warning.cjs   # Supprime le warning [baseline-browser-mapping] de Next.js pendant le build
+├── vitest.config.ts                # Configuration Vitest
+├── biome.json                      # Configuration Biome (linter/formatter)
+└── .github/workflows/ci.yml       # Pipeline CI (typecheck, lint, test, build)
 ```
-
-## 🎨 Branding
-
-Le portfolio reprend le branding de StriveX avec :
-- Gradient orange signature (du blanc au #B53800)
-- Police PP Mori (Extralight, Regular, SemiBold)
-- Design minimaliste et épuré
-- Animations au scroll avec intersection observer
-- Effet liquid glass dans le hero
 
 ## 📦 Installation
 
 ```bash
 # Installer les dépendances
-pnpm install
+bun install
 
 # Lancer le serveur de développement
-pnpm dev
+bun dev
 
 # Build de production
-pnpm build
+bun run build
 
 # Démarrer le serveur de production
-pnpm start
+bun start
 ```
+
+## 🔧 Commandes de qualité
+
+```bash
+bun typecheck  # Vérification des types TypeScript
+bun lint       # Vérification avec Biome (linting + formatting)
+bun test       # Tests unitaires avec Vitest
+bun format     # Formatage du code avec Biome
+```
+
+## 🎯 Fonctionnalités
+
+- ✅ ISR avec revalidation toutes les 24h
+- ✅ Métadonnées SEO complètes (Open Graph, Twitter)
+- ✅ Données structurées JSON-LD (Person, WebSite, ProfessionalService, FAQPage)
+- ✅ Security headers (X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
+- ✅ Design responsive (mobile-first)
+- ✅ Animations avec motion/react et reduced-motion support
+- ✅ Dark mode avec toggle
+- ✅ Accessibilité (ARIA labels, semantic HTML)
+- ✅ CI pipeline (GitHub Actions : typecheck + lint + test + build)
+- ✅ Route llms.txt pour les moteurs de recherche IA
+
+## 📱 Sections
+
+1. **Navbar**: Navigation principale avec toggle de thème
+2. **Hero**: Présentation avec description professionnelle et CTA
+3. **Projects**: Projets et réalisations
+4. **Clients**: Clients et partenaires
+5. **Value**: Proposition de valeur et approche
+6. **Journey**: Parcours professionnel
+7. **FAQ**: Questions fréquentes (avec schema FAQPage)
+8. **Footer**: Liens et informations
 
 ## 🔧 Configuration
 
-Personnalisez votre portfolio en modifiant `src/lib/site.config.ts` :
+Personnalisez le portfolio en modifiant `src/lib/site.config.ts` :
 
 ```typescript
 export const siteConfig = {
@@ -83,25 +123,6 @@ export const siteConfig = {
 };
 ```
 
-## 🎯 Fonctionnalités
-
-- ✅ ISR avec revalidation toutes les 24h
-- ✅ Métadonnées SEO complètes (Open Graph, Twitter)
-- ✅ Données structurées JSON-LD (Person, WebSite, ProfessionalService)
-- ✅ Design responsive (mobile-first)
-- ✅ Animations au scroll avec Intersection Observer
-- ✅ Accessibilité (ARIA labels, semantic HTML)
-- ✅ Performance optimisée
-- ✅ Dark mode friendly
-
-## 📱 Sections
-
-1. **Hero**: Présentation avec description professionnelle et CTA
-2. **Skills**: Stack technique (principale, secondaire, outils)
-3. **Expertise**: Compétences IA et automatisation
-4. **Contact**: Moyens de contact (email, LinkedIn, calendrier, GitHub)
-5. **Footer**: Liens et informations
-
 ## 🎨 Personnalisation
 
 ### Modifier les compétences
@@ -112,14 +133,6 @@ export const siteConfig = {
 - `devTools`: Outils de développement
 - `aiSkills`: Compétences IA
 - `workflowSkills`: Compétences workflow
-
-### Modifier le style
-
-Les styles principaux se trouvent dans `src/app/globals.css` :
-- Animations
-- Couleurs
-- Fonts
-- Classes utilitaires
 
 ### Ajouter une section
 
