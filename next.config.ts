@@ -25,6 +25,18 @@ const nextConfig: NextConfig = {
           },
         ],
       },
+      {
+        source: "/",
+        headers: [
+          {
+            key: "Link",
+            value: [
+              '</llms.txt>; rel="describedby"; type="text/plain"',
+              '</sitemap.xml>; rel="sitemap"; type="application/xml"',
+            ].join(", "),
+          },
+        ],
+      },
     ];
   },
 };
