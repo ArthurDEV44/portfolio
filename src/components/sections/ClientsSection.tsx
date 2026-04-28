@@ -1,102 +1,132 @@
+"use client";
+
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { DragCarousel } from "@/components/motion/DragCarousel";
-import {
-  MotionContainer,
-  MotionHeading,
-  MotionItem,
-} from "@/components/motion/MotionWrapper";
-import { fadeInUp, staggerContainer } from "@/lib/animation-variants";
-
-const clients = [
-  {
-    title: "Azuna",
-    description: "Site vitrine pour une conciergerie immobilière à Nice.",
-    image: "/images/azuna.pro_.webp",
-    url: "https://azuna.pro",
-  },
-  {
-    title: "Dress Night",
-    description: "E-commerce de robes de soirée avec panel admin.",
-    image: "/images/dress-night.com_.webp",
-    url: null,
-  },
-  {
-    title: "Au Sommet de Chez Vous",
-    description: "Site vitrine pour une entreprise d'élagage dans le Morbihan.",
-    image: "/images/ausommetdechezvous.bzh_.webp",
-    url: "https://ausommetdechezvous.bzh",
-  },
-];
+import { useEffect, useRef, useState } from "react";
+import { type Client, clients } from "@/lib/site.config";
 
 export function ClientsSection() {
+  const previewRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState<Client | null>(null);
+
+  useEffect(() => {
+    const move = (e: MouseEvent) => {
+      const node = previewRef.current;
+      if (!node) return;
+      node.style.left = `${e.clientX + 24}px`;
+      node.style.top = `${e.clientY}px`;
+    };
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, []);
+
   return (
-    <section
-      id="clients"
-      className="py-12 lg:py-16 overflow-hidden"
-      aria-labelledby="clients-heading"
-    >
-      <div className="max-w-[800px] mx-auto px-4 sm:px-6">
-        <MotionContainer variants={staggerContainer}>
-          <MotionHeading
+    <section id="clients" className="section" aria-labelledby="clients-heading">
+      <div className="reveal" style={{ marginBottom: 56 }}>
+        <div className="eyebrow" style={{ marginBottom: 20 }}>
+          02 / Réalisations
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            gap: 32,
+            flexWrap: "wrap",
+          }}
+        >
+          <h2
             id="clients-heading"
-            variants={fadeInUp}
-            className="text-xl sm:text-2xl lg:text-3xl font-mono tracking-tight text-gray-900 dark:text-white mb-4"
+            className="font-serif"
+            style={{
+              fontSize: "clamp(32px, 5vw, 56px)",
+              lineHeight: 1,
+              margin: 0,
+              letterSpacing: "-0.025em",
+              fontWeight: 400,
+              maxWidth: 720,
+            }}
           >
-            Réalisations clients
-          </MotionHeading>
-          <MotionItem variants={fadeInUp}>
-            <p className="text-gray-400 dark:text-white/40 mb-12">
-              Glissez pour explorer
-            </p>
-          </MotionItem>
-        </MotionContainer>
+            Travaux pour{" "}
+            <span style={{ fontStyle: "italic", color: "var(--fg-muted)" }}>
+              clients
+            </span>
+            .
+          </h2>
+          <p
+            className="font-mono"
+            style={{
+              fontSize: 12,
+              color: "var(--fg-muted)",
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              margin: 0,
+            }}
+          >
+            {String(clients.length).padStart(2, "0")} sites
+          </p>
+        </div>
       </div>
 
-      <DragCarousel>
-        {clients.map((client) => {
-          const Wrapper = client.url ? "a" : "div";
-          const linkProps = client.url
-            ? {
-                href: client.url,
-                target: "_blank" as const,
-                rel: "noopener noreferrer",
-              }
-            : {};
+      <div className="proj-index reveal">
+        {clients.map((c, i) => {
+          const content = (
+            <>
+              <span className="num">{String(i + 1).padStart(2, "0")}</span>
+              <span className="title">
+                {c.title}
+                <span className="desc">{c.description}</span>
+              </span>
+              <span className="meta">{c.year}</span>
+              <span className="arrow">
+                {c.url ? <ArrowUpRight size={14} strokeWidth={1.5} /> : null}
+              </span>
+            </>
+          );
 
+          if (c.url) {
+            return (
+              <a
+                key={c.title}
+                href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="proj-row"
+                onMouseEnter={() => setHovered(c)}
+                onMouseLeave={() => setHovered(null)}
+              >
+                {content}
+              </a>
+            );
+          }
           return (
-            <div
-              key={client.title}
-              className="shrink-0 w-[85vw] sm:w-[500px] lg:w-[560px] group"
+            <article
+              key={c.title}
+              className="proj-row"
+              onMouseEnter={() => setHovered(c)}
+              onMouseLeave={() => setHovered(null)}
             >
-              <Wrapper {...linkProps} className="block">
-                <div className="relative aspect-[16/9] rounded-xl overflow-hidden mb-4">
-                  <Image
-                    src={client.image}
-                    alt={client.title}
-                    fill
-                    sizes="(min-width: 1024px) 560px, (min-width: 640px) 500px, 85vw"
-                    className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                    draggable={false}
-                  />
-                </div>
-
-                <div className="flex items-center gap-3 mb-1">
-                  <h3 className="text-lg font-display font-medium text-gray-900 dark:text-white">
-                    {client.title}
-                  </h3>
-                  {client.url && (
-                    <ArrowUpRight className="w-4 h-4 text-gray-300 dark:text-white/30 group-hover:text-gray-500 dark:group-hover:text-white/60 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  )}
-                </div>
-                <p className="text-sm text-gray-500 dark:text-white/50 leading-relaxed">
-                  {client.description}
-                </p>
-              </Wrapper>
-            </div>
+              {content}
+            </article>
           );
         })}
-      </DragCarousel>
+      </div>
+
+      <div
+        ref={previewRef}
+        className={`proj-preview ${hovered ? "visible" : ""}`}
+        aria-hidden="true"
+      >
+        {hovered && (
+          <Image
+            src={hovered.image}
+            alt=""
+            fill
+            sizes="320px"
+            className="preview-img"
+          />
+        )}
+      </div>
     </section>
   );
 }

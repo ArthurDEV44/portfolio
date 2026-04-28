@@ -1,6 +1,7 @@
 // Export centralisé de tous les composants
 
 export { ClientsSection } from "./sections/ClientsSection";
+export { CtaSection } from "./sections/CtaSection";
 export { FaqSection } from "./sections/FaqSection";
 export { FooterSection } from "./sections/FooterSection";
 export { HeroSection } from "./sections/HeroSection";

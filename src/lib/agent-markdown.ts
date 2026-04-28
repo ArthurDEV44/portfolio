@@ -14,7 +14,7 @@ export function buildHomepageMarkdown(): string {
     .map((t) => `- **${t.name}** (${t.category})`)
     .join("\n");
   const aiList = aiSkills
-    .map((s) => `- **${s.name}** — ${s.description}`)
+    .map((s) => `- **${s.name}** : ${s.description}`)
     .join("\n");
   const faqList = faqItems
     .map((f) => `### ${f.question}\n\n${f.answer}`)
@@ -28,9 +28,9 @@ AI Builder & Architecte Produit basé en France. Je construis des produits tech 
 
 ## Projets
 
-- [OpenbookLM](https://www.openbooklm.fr) — SaaS de recherche intelligente dans les documents, propulsée par du RAG avancé et des agents IA.
-- [Rust Doctor](https://rust-doctor.vercel.app) — Outil d'analyse de santé pour projets Rust : CLI, serveur MCP et skill Claude Code.
-- [Contributions Open Source](https://github.com/ArthurDEV44) — Contributeur actif sur Zed et d'autres projets open source.
+- [OpenbookLM](https://www.openbooklm.fr) : SaaS de recherche intelligente dans les documents, propulsée par du RAG avancé et des agents IA.
+- [Rust Doctor](https://rust-doctor.vercel.app) : Outil d'analyse de santé pour projets Rust : CLI, serveur MCP et skill Claude Code.
+- [Contributions Open Source](https://github.com/ArthurDEV44) : Contributeur actif sur Zed et d'autres projets open source.
 
 ## Services
 

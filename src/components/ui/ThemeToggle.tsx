@@ -10,15 +10,15 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="p-2 text-gray-400 hover:text-gray-900 dark:text-white/40 dark:hover:text-white transition-colors"
+      className="icon-btn"
       aria-label={
         theme === "dark" ? "Passer au thème clair" : "Passer au thème sombre"
       }
     >
       {theme === "dark" ? (
-        <Sun className="w-5 h-5" />
+        <Sun className="w-3.5 h-3.5" strokeWidth={1.5} />
       ) : (
-        <Moon className="w-5 h-5" />
+        <Moon className="w-3.5 h-3.5" strokeWidth={1.5} />
       )}
     </button>
   );

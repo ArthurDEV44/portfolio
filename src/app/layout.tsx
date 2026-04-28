@@ -1,24 +1,15 @@
+import { GeistMono } from "geist/font/mono";
 import { GeistPixelCircle, GeistPixelGrid } from "geist/font/pixel";
+import { GeistSans } from "geist/font/sans";
 import type { Metadata, Viewport } from "next";
-import {
-  Cormorant_Garamond,
-  Geist_Mono,
-  Inter,
-  Plus_Jakarta_Sans,
-} from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
+import { RevealOnScroll } from "@/components/motion/Reveal";
 import { Providers } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap",
-});
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-plus-jakarta-sans",
-  weight: ["500", "600", "700"],
   display: "swap",
 });
 
@@ -30,20 +21,14 @@ const cormorantGaramond = Cormorant_Garamond({
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://arthurjean.com"),
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+    { media: "(prefers-color-scheme: light)", color: "#fbfaf7" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0c" },
   ],
 };
 
@@ -64,7 +49,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${plusJakartaSans.variable} ${cormorantGaramond.variable} ${geistMono.variable} ${GeistPixelGrid.variable} ${GeistPixelCircle.variable} antialiased`}
+        className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable} ${cormorantGaramond.variable} ${GeistPixelGrid.variable} ${GeistPixelCircle.variable} antialiased`}
       >
         <a
           href="#main-content"
@@ -73,7 +58,9 @@ export default function RootLayout({
           Aller au contenu principal
         </a>
 
+        <div className="atmos" aria-hidden="true" />
         <Providers>{children}</Providers>
+        <RevealOnScroll />
       </body>
     </html>
   );

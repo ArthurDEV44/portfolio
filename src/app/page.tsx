@@ -1,5 +1,6 @@
 import {
   ClientsSection,
+  CtaSection,
   FaqSection,
   FooterSection,
   HeroSection,
@@ -110,6 +111,7 @@ export default function Home() {
         <ValueSection />
         <JourneySection />
         <FaqSection />
+        <CtaSection />
         <FooterSection />
       </main>
     </>

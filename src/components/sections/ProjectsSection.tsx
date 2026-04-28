@@ -1,112 +1,186 @@
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { DragCarousel } from "@/components/motion/DragCarousel";
-import {
-  MotionContainer,
-  MotionHeading,
-  MotionItem,
-} from "@/components/motion/MotionWrapper";
-import { fadeInUp, staggerContainer } from "@/lib/animation-variants";
-
-const projects = [
-  {
-    title: "OpenbookLM",
-    description:
-      "SaaS de recherche intelligente dans les documents. Alternative à NotebookLM, propulsée par du RAG avancé et des agents IA.",
-    tags: ["SaaS", "RAG", "Agents IA"],
-    url: "https://www.openbooklm.fr",
-    image: "/images/openbooklm.fr_fr.webp",
-  },
-  {
-    title: "Rust Doctor",
-    description:
-      "Outil d'analyse de santé pour projets Rust. CLI, serveur MCP et skill Claude Code.",
-    tags: ["Dev Tool", "Rust", "MCP"],
-    url: "https://rust-doctor.vercel.app",
-    image: "/images/rust-doctor.vercel.app.webp",
-  },
-  {
-    title: "Contributions Open Source",
-    description: "Contributeur actif sur Zed et d'autres projets open source.",
-    tags: ["Open Source", "Zed"],
-    url: "https://github.com/ArthurDEV44",
-    image: "/images/github.com_ArthurDEV44.webp",
-  },
-];
+import { projects } from "@/lib/site.config";
 
 export function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="py-12 lg:py-16 overflow-hidden"
+      className="section"
       aria-labelledby="projects-heading"
     >
-      <div className="max-w-[800px] mx-auto px-4 sm:px-6">
-        <MotionContainer variants={staggerContainer}>
-          <MotionHeading
+      <div className="reveal" style={{ marginBottom: 56 }}>
+        <div className="eyebrow" style={{ marginBottom: 20 }}>
+          01 / Produits
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            gap: 32,
+            flexWrap: "wrap",
+          }}
+        >
+          <h2
             id="projects-heading"
-            variants={fadeInUp}
-            className="text-xl sm:text-2xl lg:text-3xl font-mono tracking-tight text-gray-900 dark:text-white mb-4"
+            className="font-serif"
+            style={{
+              fontSize: "clamp(32px, 5vw, 56px)",
+              lineHeight: 1,
+              margin: 0,
+              letterSpacing: "-0.025em",
+              fontWeight: 400,
+              maxWidth: 720,
+            }}
           >
-            Projets
-          </MotionHeading>
-          <MotionItem variants={fadeInUp}>
-            <p className="text-gray-400 dark:text-white/40 mb-12">
-              Glissez pour explorer
-            </p>
-          </MotionItem>
-        </MotionContainer>
+            Projets{" "}
+            <span style={{ fontStyle: "italic", color: "var(--fg-muted)" }}>
+              en solo
+            </span>
+            .
+          </h2>
+          <p
+            className="font-mono"
+            style={{
+              fontSize: 12,
+              color: "var(--fg-muted)",
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              margin: 0,
+            }}
+          >
+            {String(projects.length).padStart(2, "0")} actifs
+          </p>
+        </div>
+        <div
+          style={{
+            marginTop: 20,
+            color: "var(--fg-muted)",
+            maxWidth: 620,
+            lineHeight: 1.6,
+          }}
+        >
+          Produits où j&apos;ai tout fait : produit, archi, code, design,
+          déploiement.
+        </div>
       </div>
 
-      <DragCarousel>
-        {projects.map((project, index) => (
-          <div
-            key={project.title}
-            className="shrink-0 w-[85vw] sm:w-[500px] lg:w-[560px] group"
-          >
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <div className="relative aspect-[16/9] rounded-xl overflow-hidden mb-4">
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns:
+            "repeat(auto-fit, minmax(min(340px, 100%), 1fr))",
+          gap: 24,
+        }}
+      >
+        {projects.map((p, i) => {
+          const inner = (
+            <>
+              <div className="shot">
                 <Image
-                  src={project.image}
-                  alt={project.title}
+                  src={p.image}
+                  alt={p.title}
                   fill
-                  sizes="(min-width: 1024px) 560px, (min-width: 640px) 500px, 85vw"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-                  draggable={false}
-                  priority={index === 0}
+                  sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw"
+                  priority={i === 0}
                 />
               </div>
-
-              <div className="flex items-start justify-between gap-4 mb-1">
-                <div className="flex items-center gap-3">
-                  <h3 className="text-lg font-display font-medium text-gray-900 dark:text-white">
-                    {project.title}
+              <div style={{ padding: "16px 4px 0" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    gap: 12,
+                    alignItems: "baseline",
+                    marginBottom: 6,
+                  }}
+                >
+                  <h3
+                    style={{
+                      fontSize: 17,
+                      fontWeight: 500,
+                      margin: 0,
+                      letterSpacing: "-0.01em",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 8,
+                    }}
+                  >
+                    {p.title}
+                    {p.url && (
+                      <ArrowUpRight
+                        size={14}
+                        strokeWidth={1.5}
+                        style={{ color: "var(--fg-faint)" }}
+                      />
+                    )}
                   </h3>
-                  <ArrowUpRight className="w-4 h-4 text-gray-300 dark:text-white/30 group-hover:text-gray-500 dark:group-hover:text-white/60 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  <span
+                    className="font-mono"
+                    style={{
+                      fontSize: 11,
+                      color: "var(--fg-faint)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.12em",
+                    }}
+                  >
+                    {p.meta}
+                  </span>
                 </div>
-                <div className="flex gap-2 shrink-0">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-xs text-gray-400 dark:text-white/40 border border-gray-200 dark:border-white/10 rounded-full"
-                    >
-                      {tag}
+                <p
+                  style={{
+                    color: "var(--fg-muted)",
+                    fontSize: 14,
+                    lineHeight: 1.55,
+                    margin: "0 0 12px",
+                  }}
+                >
+                  {p.description}
+                </p>
+                <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                  {p.tags.map((t) => (
+                    <span key={t} className="tag">
+                      {t}
                     </span>
                   ))}
                 </div>
               </div>
-              <p className="text-sm text-gray-500 dark:text-white/50 leading-relaxed">
-                {project.description}
-              </p>
-            </a>
-          </div>
-        ))}
-      </DragCarousel>
+            </>
+          );
+
+          const cardStyle = {
+            textDecoration: "none" as const,
+            color: "inherit",
+            display: "block",
+          };
+
+          if (p.url) {
+            return (
+              <a
+                key={p.title}
+                href={p.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-card reveal"
+                style={cardStyle}
+              >
+                {inner}
+              </a>
+            );
+          }
+
+          return (
+            <article
+              key={p.title}
+              className="project-card reveal"
+              style={cardStyle}
+            >
+              {inner}
+            </article>
+          );
+        })}
+      </div>
     </section>
   );
 }

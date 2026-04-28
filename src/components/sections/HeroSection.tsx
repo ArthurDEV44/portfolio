@@ -1,94 +1,137 @@
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
-import { MotionContainer, MotionItem } from "@/components/motion/MotionWrapper";
-import { Button } from "@/components/ui/button";
-import { fadeInUp, staggerContainerSlow } from "@/lib/animation-variants";
 import { siteConfig } from "@/lib/site.config";
-
-const socialLinks = [
-  {
-    label: "GitHub",
-    href: siteConfig.links.github,
-    external: true,
-  },
-  {
-    label: "LinkedIn",
-    href: siteConfig.links.linkedin,
-    external: true,
-  },
-  {
-    label: "X",
-    href: siteConfig.links.x,
-    external: true,
-  },
-];
 
 export function HeroSection() {
   return (
     <section
       id="hero"
-      className="pt-28 pb-12 lg:pt-32 lg:pb-16"
+      style={{ position: "relative", overflow: "hidden", isolation: "isolate" }}
       aria-labelledby="hero-heading"
     >
-      <div className="max-w-[800px] mx-auto px-4 sm:px-6">
-        <MotionContainer variants={staggerContainerSlow} immediate>
-          {/* Avatar + Name */}
-          <MotionItem
-            variants={fadeInUp}
-            className="flex items-center gap-5 mb-6"
+      <div className="section-mesh hero-mesh-1" aria-hidden="true" />
+      <div className="section-mesh hero-mesh-2" aria-hidden="true" />
+
+      <div
+        className="section reveal"
+        style={{ paddingTop: 140, paddingBottom: 60 }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 14,
+            marginBottom: 56,
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              width: 44,
+              height: 44,
+              borderRadius: "50%",
+              overflow: "hidden",
+              border: "1px solid var(--line)",
+              flexShrink: 0,
+            }}
           >
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shrink-0 border border-gray-200 dark:border-white/10">
-              <Image
-                src="/images/avatar.webp"
-                alt={siteConfig.name}
-                fill
-                sizes="96px"
-                className="object-cover"
-                priority
-              />
+            <Image
+              src="/images/avatar.webp"
+              alt={siteConfig.name}
+              fill
+              sizes="44px"
+              className="object-cover"
+              priority
+            />
+          </div>
+          <div>
+            <div style={{ fontWeight: 500, fontSize: 15 }}>
+              {siteConfig.name}
             </div>
-            <div>
-              <h1
-                id="hero-heading"
-                className="text-3xl sm:text-4xl lg:text-5xl font-pixel-grid text-gray-900 dark:text-white"
+            <div
+              className="font-mono"
+              style={{
+                fontSize: 11,
+                color: "var(--fg-muted)",
+                textTransform: "uppercase",
+                letterSpacing: "0.14em",
+              }}
+            >
+              <span
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 6,
+                }}
               >
-                {siteConfig.name}
-              </h1>
-              <p className="text-lg text-gray-500 dark:text-white/50">
-                AI Builder & Architecte Produit
-              </p>
+                <span
+                  className="available-dot"
+                  style={{ width: 6, height: 6 }}
+                />
+                {siteConfig.role} · Disponible
+              </span>
             </div>
-          </MotionItem>
+          </div>
+        </div>
 
-          {/* Description */}
-          <MotionItem variants={fadeInUp}>
-            <p className="text-gray-400 dark:text-white/40 max-w-xl leading-relaxed mb-8 italic">
-              Je construis des produits tech de bout en bout : SaaS, dev tools
-              et systèmes d&apos;agents IA. Je ne code plus, j&apos;orchestre.
-            </p>
-          </MotionItem>
+        <h1
+          id="hero-heading"
+          className="font-serif"
+          style={{
+            fontSize: "clamp(40px, 6.5vw, 80px)",
+            lineHeight: 1.05,
+            margin: 0,
+            letterSpacing: "-0.025em",
+            fontWeight: 400,
+            maxWidth: 980,
+          }}
+        >
+          Je construis des produits tech{" "}
+          <span style={{ color: "var(--fg-muted)", fontStyle: "italic" }}>
+            de bout en bout
+          </span>
+          {" : "}
+          SaaS, dev tools, et systèmes d&apos;
+          <span className="highlight">agents IA</span>. Je ne code plus,&nbsp;
+          <span style={{ fontStyle: "italic" }}>j&apos;orchestre</span>.
+        </h1>
 
-          {/* Social links */}
-          <MotionItem variants={fadeInUp} className="flex flex-wrap gap-2">
-            {socialLinks.map((link) => (
-              <Button
-                key={link.label}
-                variant="outline"
-                size="default"
-                render={
-                  // biome-ignore lint/a11y/useAnchorContent: content injected by Base UI render prop
-                  <a
-                    href={link.href}
-                    target={link.external ? "_blank" : undefined}
-                    rel={link.external ? "noopener noreferrer" : undefined}
-                    aria-label={link.label}
-                  />
-                }
-              >
-                {link.label}
-              </Button>
-            ))}
-          </MotionItem>
-        </MotionContainer>
+        <div
+          style={{
+            display: "flex",
+            gap: 8,
+            flexWrap: "wrap",
+            marginTop: 48,
+          }}
+        >
+          <a
+            className="dbtn dbtn-primary"
+            href={siteConfig.links.cal}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Réserver un appel <ArrowRight size={14} strokeWidth={1.5} />
+          </a>
+          <a className="dbtn" href="#projects">
+            Voir les projets
+          </a>
+          <a
+            className="dbtn dbtn-ghost"
+            href={siteConfig.links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub <ArrowUpRight size={14} strokeWidth={1.5} />
+          </a>
+          <a
+            className="dbtn dbtn-ghost"
+            href={siteConfig.links.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn <ArrowUpRight size={14} strokeWidth={1.5} />
+          </a>
+        </div>
       </div>
     </section>
   );

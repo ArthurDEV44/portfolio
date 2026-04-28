@@ -1,77 +1,120 @@
-import {
-  MotionContainer,
-  MotionHeading,
-  MotionItem,
-} from "@/components/motion/MotionWrapper";
-import { fadeInUp, staggerContainer } from "@/lib/animation-variants";
-
-const steps = [
-  {
-    period: "2021 - 2023",
-    title: "Apprentissage développement",
-    description:
-      "Formation en alternance. Les bases du métier, les premières lignes de code, la découverte du terrain.",
-  },
-  {
-    period: "2023 - 2025",
-    title: "Seul développeur en entreprise",
-    description:
-      "Architecture, produit, déploiement : tout reposait sur moi. Adoption de l'IA dès fin 2022 avec ChatGPT et GitHub Copilot, puis Cursor dès sa sortie.",
-  },
-  {
-    period: "2025",
-    title: "Solopreneur",
-    description:
-      "Je lance mes propres produits : OpenbookLM et Rust Doctor. Contributeur open source sur Zed. Bascule complète sur Cursor puis Claude Code.",
-  },
-  {
-    period: "2026",
-    title: "Expert AI Builder",
-    description:
-      "Maîtrise complète de Claude Code : skills, subagents, workflows multi-agents, mode swarm, MCP. Codex intégré au workflow pour les PRD et la review de code.",
-  },
-];
+import { journey } from "@/lib/site.config";
 
 export function JourneySection() {
   return (
-    <section
-      id="journey"
-      className="py-12 lg:py-16"
-      aria-labelledby="journey-heading"
-    >
-      <div className="max-w-[800px] mx-auto px-4 sm:px-6">
-        <MotionContainer variants={staggerContainer}>
-          <MotionHeading
+    <section id="journey" className="section" aria-labelledby="journey-heading">
+      <div className="reveal" style={{ marginBottom: 56 }}>
+        <div className="eyebrow" style={{ marginBottom: 20 }}>
+          04 / Parcours
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "flex-end",
+            gap: 32,
+            flexWrap: "wrap",
+          }}
+        >
+          <h2
             id="journey-heading"
-            variants={fadeInUp}
-            className="text-xl sm:text-2xl lg:text-3xl font-mono tracking-tight text-gray-900 dark:text-white mb-16"
+            className="font-serif"
+            style={{
+              fontSize: "clamp(32px, 5vw, 56px)",
+              lineHeight: 1,
+              margin: 0,
+              letterSpacing: "-0.025em",
+              fontWeight: 400,
+              maxWidth: 720,
+            }}
           >
-            Parcours
-          </MotionHeading>
+            De l&apos;apprenti au{" "}
+            <span style={{ fontStyle: "italic", color: "var(--fg-muted)" }}>
+              builder solo
+            </span>
+            .
+          </h2>
+          <p
+            className="font-mono"
+            style={{
+              fontSize: 12,
+              color: "var(--fg-muted)",
+              textTransform: "uppercase",
+              letterSpacing: "0.14em",
+              margin: 0,
+            }}
+          >
+            2021 → 2026
+          </p>
+        </div>
+      </div>
 
-          <div className="flex flex-col gap-12">
-            {steps.map((step) => (
-              <MotionItem
-                key={step.title}
-                variants={fadeInUp}
-                className="relative flex flex-col gap-3"
-              >
-                <div className="flex items-center gap-3 mb-1">
-                  <div className="w-2 h-2 bg-gray-300 dark:bg-white/20 shrink-0" />
-                  <span className="text-xs text-gray-400 dark:text-white/30 font-mono">
-                    {step.period}
-                  </span>
-                </div>
-                <h3 className="text-lg font-display font-medium text-gray-900 dark:text-white">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-gray-500 dark:text-white/50 leading-relaxed">
-                  {step.description}
-                </p>
-              </MotionItem>
-            ))}
+      <div style={{ position: "relative", paddingLeft: 32, maxWidth: 760 }}>
+        <div className="tl-rail" />
+        {journey.map((s, i) => (
+          <div
+            key={s.title}
+            className="reveal"
+            style={{
+              position: "relative",
+              marginBottom: i === journey.length - 1 ? 0 : 56,
+            }}
+          >
+            <div style={{ position: "absolute", left: -32, top: 4 }}>
+              <div className={`tl-node ${s.current ? "current" : ""}`} />
+            </div>
+            <div
+              className="font-mono"
+              style={{
+                fontSize: 11,
+                color: "var(--fg-faint)",
+                textTransform: "uppercase",
+                letterSpacing: "0.14em",
+                marginBottom: 8,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              {s.period}
+              {s.current && (
+                <span
+                  style={{
+                    padding: "2px 6px",
+                    borderRadius: 4,
+                    background:
+                      "color-mix(in srgb, var(--available) 18%, transparent)",
+                    color: "var(--available)",
+                    fontSize: 10,
+                  }}
+                >
+                  Now
+                </span>
+              )}
+            </div>
+            <h3
+              className="font-serif"
+              style={{
+                fontSize: 26,
+                fontWeight: 400,
+                letterSpacing: "-0.02em",
+                margin: "0 0 10px",
+              }}
+            >
+              {s.title}
+            </h3>
+            <p
+              style={{
+                color: "var(--fg-muted)",
+                lineHeight: 1.6,
+                margin: 0,
+                maxWidth: 580,
+              }}
+            >
+              {s.description}
+            </p>
           </div>
-        </MotionContainer>
+        ))}
       </div>
     </section>
   );

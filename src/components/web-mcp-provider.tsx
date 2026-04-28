@@ -119,7 +119,7 @@ export function WebMcpProvider() {
     ];
 
     nav.modelContext.provideContext({ tools }).catch(() => {
-      // WebMCP is experimental — silently ignore registration failures.
+      // WebMCP is experimental, silently ignore registration failures.
     });
   }, []);
 
